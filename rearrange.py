@@ -3,6 +3,7 @@ import numpy as np
 def rearrange(ratios,ratios_sorted,width,Y):
     new_width = np.array([])
     new_Y = np.array([])
+    index_array = np.array([])
     for i in range(len(ratios_sorted)):
         index_array = np.where(ratios == ratios_sorted[i])[0]
         if len(index_array) > 1:
@@ -10,7 +11,8 @@ def rearrange(ratios,ratios_sorted,width,Y):
         else:
             index = int(index_array)
         ratios[index] = -99
+        index_array = np.append(index_array,index)
         new_Y = np.append(new_Y,Y[index]);
         new_width = np.append(new_width,width[index]);
     
-    return new_width,new_Y;
+    return new_width,new_Y, index_array;

@@ -1,6 +1,6 @@
 import math
 import numpy as np
-def branch_and_bounds(new_width,new_Y,total_width):
+def branch_and_bounds(new_width,new_Y,total_width,indexing):
     x = np.zeros(len(new_width))
     
     x[0] = total_width/new_width[0]
@@ -12,6 +12,15 @@ def branch_and_bounds(new_width,new_Y,total_width):
         gar_val = math.floor(x[i])
         for j in range(math.floor(x[i])+1):
             if i + 1 == len(new_width):
+                  if z <= 1:
+                      return -99
+                  #print(x)
+                  x_n = x
+                  l = 0;
+                  for k in indexing:
+                        x[k] = x_n[l]
+                        l += 1
+                        #print(x)
                   return x;   
             #print(math.floor(x[i]))
             x[i] = j;
@@ -29,5 +38,7 @@ def branch_and_bounds(new_width,new_Y,total_width):
               #print(z_arr)
               x[i] = np.arange(0,gar_val + 1)[z_arr.tolist().index(np.max(z_arr))]
               x[i+1] = x_new[z_arr.tolist().index(np.max(z_arr))]
-              print(x)
+              #print(x)
+              x = np.floor(x)
+              #print(x)
               

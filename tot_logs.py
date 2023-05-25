@@ -1,8 +1,6 @@
 import numpy as np
 
-def total_logs(bases, width, demand):
-    N_a = np.array([])
-    for i in range(0, len(width)):
-        N_a = np.append(N_a, demand[i]/bases[i][i])
-    N = np.sum(N_a)
-    return N_a, N
+def total_logs(bases, demand):
+    N_array = np.matmul(np.linalg.inv(bases), demand);
+    N = np.sum(N_array)
+    return N_array, N
