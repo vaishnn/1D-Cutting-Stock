@@ -1,6 +1,8 @@
 import numpy as np
+import os 
 
 def inputs():
+    os.system('cls' if os.name == 'nt' else 'clear')
     width = np.array([])
     demand = np.array([])
 

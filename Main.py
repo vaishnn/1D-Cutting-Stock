@@ -30,27 +30,18 @@ print("Total logs {}".format(N))
 
 ## To calculate the dual variables
 Y = np.matmul(c_b,np.linalg.inv(bases))
-print("Dual variables")
-print(Y)
 
 ## Calculating ratios 
 ratios = Y/width;
-print("Ratios")
-print(ratios)
-
 ratios_sorted = np.sort(ratios)[::-1];
-print("Ratios sorted")
-print(ratios_sorted)
+
 
 
 
 new_width, new_Y, indexing = rearrange(ratios,ratios_sorted,width,Y);
-print(new_width)
-print(new_Y)    
-
 ## To apply branch and bound to get the integer column
 
-optimal_bases, new_total_logs = optimal_sol(bases, new_width, new_Y, total_width,demand, indexing)
+optimal_bases, new_total_logs = optimal_sol(bases, new_width, new_Y, total_width,demand, width,Y)
 print("Optimal Bases")
 print(optimal_bases)
 print(new_total_logs);
